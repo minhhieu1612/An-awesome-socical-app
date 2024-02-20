@@ -2,6 +2,9 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const envPath = '.env.' + process.env.NODE_ENV;
+require('dotenv').config({path: envPath});
+
 module.exports = {
 	entry: './index.js',
 	output: {
@@ -35,6 +38,11 @@ module.exports = {
 				type: 'asset/resource',
 			},
 		]
+	},
+	resolve: {
+		alias: {
+			$: __dirname
+		}
 	},
 	plugins: [
 		new HtmlWebpackPlugin({template: './public/index.html'})
